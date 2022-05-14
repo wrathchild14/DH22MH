@@ -1,15 +1,21 @@
 <template>
   <v-toolbar>
-    <v-toolbar-title >
-      <v-btn x-large text to="/">Homepage</v-btn>
-    </v-toolbar-title>
+    <div class="mx-auto">
+      <router-link to="/">
+        <v-img
+          class="mx-auto"
+          max-width="50"
+          max-height="50"
+          src="../assets/dragonhack_logo.jpeg"
+        ></v-img>
+      </router-link>
+    </div>
   </v-toolbar>
 </template>
 
 
 <script>
 export default {
-  components: {
-  },
+  components: {},
 };
 </script>
