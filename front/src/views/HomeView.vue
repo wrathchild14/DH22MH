@@ -11,9 +11,7 @@
       max-width="400"
     ></v-file-input>
 
-    <div class="text-xs-center">
-      <v-btn block @click="Analyze()">Analyze data</v-btn>
-    </div>
+    <v-btn block @click="Analyze()">Analyze data</v-btn>
 
     <v-dialog v-model="showAlert" width="210">
       <v-card>
