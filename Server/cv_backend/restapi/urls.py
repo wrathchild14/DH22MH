@@ -12,4 +12,6 @@ urlpatterns = [
     path('get_address', views.get_address, name='get_address'),
     path('get_pr_lang', views.get_pr_lang, name='get_pr_lang'),
     path('get_info', views.get_info, name='get_info'),
+    path('classify', views.model_predict, name='model_predict'),
+
 ]

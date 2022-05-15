@@ -2,6 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 import json
+from .mlmodel import ml_model
 
 import PyPDF2 as pdf
 import slate3k as slate
@@ -36,9 +37,16 @@ def pdf_recieve(request):
                     t2 = t2.replace("–", "-")
                     cvs.append(t2)
 
-        d = {"test": 5}
+        return Response(status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def model_predict(request):
+    if request.method == 'GET':
+        pred = ml_model({"cleaned_resume": [cvs[0]]})
+
+        d = {"pred": list(pred)}
         response = json.dumps(d)
-        return Response(response, status=status.HTTP_200_OK)
+        return Response(response)
 
 @api_view(['GET', 'POST', ])
 def delete_pdfs(request):
