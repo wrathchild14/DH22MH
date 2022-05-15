@@ -12,17 +12,6 @@ import shutil
 cvs = []
 directory = "pdfs/"
 
-@api_view(['GET', 'POST', ])
-def test(request):
-    if request.method == 'GET':
-        print("Test")
-
-        d = {"test": 5}
-
-        response = json.dumps(d)
-        return Response(response)
-
-
 @api_view(['POST'])
 def pdf_recieve(request):
     if request.method == 'POST':
@@ -114,6 +103,20 @@ def get_pr_lang(request):
         response = json.dumps(d)
         return Response(response)
 
+@api_view(['GET'])
+def get_info(request):
+    if request.method == 'GET':
+        d = {
+            'seniority': seniority(cvs[0]),
+            'name': name(cvs[0]),
+            'email': email(cvs[0]),
+            'faculty': faculty(cvs[0]),
+            'address': address(cvs[0]),
+            'pr_lang': pr_lang(cvs[0])
+        }
+
+    response = json.dumps(d)
+    return Response(response)
 
 
 # ---------------------------------- Helping functions ---------------------------------- #

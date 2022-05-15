@@ -2,30 +2,26 @@
   <v-main>
     <NavBar />
     <v-img
-    class="mx-auto my-10"
-          max-width="200"
-          max-height="200"
-          src="../assets/detective.jpg">
-
+      class="mx-auto my-10"
+      max-width="200"
+      max-height="200"
+      src="../assets/detective.jpg"
+    >
     </v-img>
-    <v-row >
+    <v-row>
       <v-col cols="5">
         <v-card width="70%" class="mx-auto mt-10 elevation-0">
           <v-container>
             <v-checkbox
-            v-model="selected"
-            label="Categorization"
-            value="Categorization"
+              v-model="selected"
+              label="Categorization"
+              value="Categorization"
             >
               Categorization
             </v-checkbox>
           </v-container>
-          <v-text-field
-            dense
-            outlined
-            label="Keywords"
-          ></v-text-field>
-          
+          <v-text-field dense outlined label="Keywords"></v-text-field>
+
           <v-text-field
             solo
             label="Location"
@@ -33,16 +29,14 @@
           ></v-text-field>
 
           <v-text-field
-          v-model="numberValue"
-          label="Minimum years of experience"
-          value="1"
-          suffix="years"
-        ></v-text-field>
-
+            v-model="numberValue"
+            label="Minimum years of experience"
+            value="1"
+            suffix="years"
+          ></v-text-field>
         </v-card>
       </v-col>
       <v-col cols="7">
-        
         <v-card width="70%" class="mx-auto mt-10 elevation-0">
           <h1 style="font-family: 'Verdana'">Attach files</h1>
           <v-file-input
@@ -55,14 +49,18 @@
             class="my-10"
           ></v-file-input>
           <div class="text-center my-10">
-            <v-btn color="teal darken-4" class="white--text" x-large rounded @click="Analyze()">Analyze data</v-btn>
+            <v-btn
+              color="teal darken-4"
+              class="white--text"
+              x-large
+              rounded
+              @click="Analyze()"
+              >Analyze data</v-btn
+            >
           </div>
         </v-card>
       </v-col>
     </v-row>
-    
-     
-    
 
     <v-dialog v-model="showAlert" width="210">
       <v-card>
@@ -79,7 +77,7 @@
 
 <script>
 import NavBar from "@/components/NavBar";
-// import router from "@/router";
+import router from "@/router";
 import { api } from "../axios-api";
 
 export default {
@@ -87,7 +85,7 @@ export default {
     chosenFile: null,
     showAlert: false,
     dialog: false,
-    fileData: null
+    fileData: null,
   }),
   components: {
     NavBar,
@@ -99,24 +97,22 @@ export default {
       } else {
         console.log(this.chosenFile[0]);
 
-        const form = new FormData()
-        form.append('file', this.chosenFile[0])
+        const form = new FormData();
+        form.append("file", this.chosenFile[0]);
 
         console.log(form);
         api
-        .post("api/pdf", form)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-        // router.push("/results");
+          .post("api/pdf", form)
+          .then((response) => {
+            console.log(response);
+            router.push("/results");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
-
     },
-    processFile() {
-    },
+    processFile() {},
   },
 };
 </script>
