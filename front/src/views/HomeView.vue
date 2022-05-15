@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <NavBar />
-     
+
     <v-file-input
       counter
       multiple
@@ -28,13 +28,15 @@
 
 <script>
 import NavBar from "@/components/NavBar";
-import router from "@/router";
+// import router from "@/router";
+import { api } from "../axios-api";
 
 export default {
   data: () => ({
     chosenFile: null,
     showAlert: false,
     dialog: false,
+    fileData: null
   }),
   components: {
     NavBar,
@@ -44,9 +46,25 @@ export default {
       if (!this.chosenFile) {
         this.showAlert = true;
       } else {
-        console.log(this.chosenFile);
-        router.push("/results");
+        console.log(this.chosenFile[0]);
+
+        const form = new FormData()
+        form.append('file', this.chosenFile[0])
+
+        console.log(form);
+        api
+        .post("api/pdf", form)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        // router.push("/results");
       }
+
+    },
+    processFile() {
     },
   },
 };
