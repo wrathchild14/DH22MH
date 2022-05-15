@@ -1,13 +1,11 @@
 <template>
-  <v-toolbar class="teal darken-4">
+  <v-toolbar height="120px">
     <div class="mx-auto">
-      <router-link to="/">
-        <v-img
-          class="mx-auto"
-          max-width="50"
-          max-height="50"
-          src="../assets/dragonhack_logo.jpeg"
-        ></v-img>
+      <router-link style="text-decoration: none; color: inherit;" to="/">
+        <v-toolbar-title>
+          <span class="font-weight-light">Cv</span>
+          <span>Analyzer</span>
+        </v-toolbar-title>
       </router-link>
     </div>
   </v-toolbar>

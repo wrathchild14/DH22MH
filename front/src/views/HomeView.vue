@@ -1,16 +1,38 @@
 <template>
   <v-main>
     <NavBar />
-    <v-img
-      class="mx-auto my-10"
-      max-width="200"
-      max-height="200"
-      src="../assets/detective.jpg"
-    >
-    </v-img>
+    <v-card flat>
+      <v-row>
+        <v-col>
+          <v-card flat class="d-flex align-start mx-10">
+            <v-img
+              class="mx-auto my-10"
+              max-width="200"
+              max-height="200"
+              src="../assets/dragonhack_logo.jpeg"
+            >
+            </v-img>
+          </v-card>
+        </v-col>
+        <v-col>
+          <v-card class="d-flex align-start mx-10" flat tile>
+            <v-img
+              class="mx-auto my-10"
+              max-width="200"
+              max-height="200"
+              src="../assets/paper.png"
+            >
+        </v-img>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-card>
+    
+    
     <v-row>
       <v-col cols="5">
         <v-card width="70%" class="mx-auto mt-10 elevation-0">
+          <h4 style="font-family: 'Verdana'">Filters</h4>
           <v-container>
             <v-checkbox
               v-model="selected"
@@ -38,7 +60,7 @@
       </v-col>
       <v-col cols="7">
         <v-card width="70%" class="mx-auto mt-10 elevation-0">
-          <h1 style="font-family: 'Verdana'">Attach files</h1>
+          <h4 style="font-family: 'Verdana'">Attach files below</h4>
           <v-file-input
             counter
             multiple
@@ -50,7 +72,7 @@
           ></v-file-input>
           <div class="text-center my-10">
             <v-btn
-              color="teal darken-4"
+              color="blue darken-3"
               class="white--text"
               x-large
               rounded
