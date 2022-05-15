@@ -3,19 +3,48 @@
     <NavBar />
     <v-img
     class="mx-auto my-10"
-          max-width="300"
-          max-height="300"
+          max-width="200"
+          max-height="200"
           src="../assets/detective.jpg">
 
     </v-img>
     <v-row >
       <v-col cols="5">
         <v-card width="70%" class="mx-auto mt-10 elevation-0">
-          <h1>filter i kategorizacija</h1>
+          <v-container>
+            <v-checkbox
+            v-model="selected"
+            label="Categorization"
+            value="Categorization"
+            >
+              Categorization
+            </v-checkbox>
+          </v-container>
+          <v-text-field
+            dense
+            outlined
+            label="Keywords"
+          ></v-text-field>
+          
+          <v-text-field
+            solo
+            label="Location"
+            append-outer-icon="mdi-map-marker"
+          ></v-text-field>
+
+          <v-text-field
+          v-model="numberValue"
+          label="Minimum years of experience"
+          value="1"
+          suffix="years"
+        ></v-text-field>
+
         </v-card>
       </v-col>
       <v-col cols="7">
+        
         <v-card width="70%" class="mx-auto mt-10 elevation-0">
+          <h1 style="font-family: 'Verdana'">Attach files</h1>
           <v-file-input
             counter
             multiple
@@ -23,9 +52,10 @@
             truncate-length="20"
             v-model="chosenFile"
             max-width="400"
+            class="my-10"
           ></v-file-input>
           <div class="text-center my-10">
-            <v-btn color="teal darken-4" class="white--text" rounded @click="Analyze()">Analyze data</v-btn>
+            <v-btn color="teal darken-4" class="white--text" x-large rounded @click="Analyze()">Analyze data</v-btn>
           </div>
         </v-card>
       </v-col>
