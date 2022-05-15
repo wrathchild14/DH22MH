@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <NavBar />
-    <v-card class="mx-auto" max-width="344">
+    <v-card class="mx-auto my-10" max-width="344">
       <v-card-text>
         <div>Candidate</div>
         <p class="text-h4 text--primary">{{ data.name }}</p>
@@ -12,7 +12,7 @@
       </v-card-text>
       <v-card-text>
           <div class="font-weight-bold ml-8 mb-2">
-            Skills
+            Programming Languages
           </div>
 
           <v-timeline
