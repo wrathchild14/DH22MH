@@ -38,9 +38,10 @@ def pdf_recieve(request):
 @api_view(['GET'])
 def model_predict(request):
     if request.method == 'GET':
-        pred = ml_model({"cleaned_resume": [cvs[0]]})
-
-        d = {"pred": list(pred)}
+        d = []
+        for i in range(0, len(cvs)):
+            pred = ml_model({"cleaned_resume": [cvs[i]]})
+            d.append({"pred": list(pred)})
         response = json.dumps(d)
         return Response(response)
 
@@ -118,16 +119,16 @@ def get_pr_lang(request):
 @api_view(['GET'])
 def get_info(request):
     if request.method == 'GET':
-        print(f"CVS:----- {cvs}")
+        d = []
         for i in range(0, len(cvs)):
-            d = {
-                f"seniority-{i}": seniority(cvs[i]),
-                f"name-{i}": name(cvs[i]),
-                f"email-{i}": email(cvs[i]),
-                f"faculty-{i}": faculty(cvs[i]),
-                f"address-{i}": address(cvs[i]),
-                f"pr_lang-{i}": pr_lang(cvs[i])
-            }
+            d.append({
+                "seniority": seniority(cvs[i]),
+                "name": name(cvs[i]),
+                "email": email(cvs[i]),
+                "faculty": faculty(cvs[i]),
+                "address": address(cvs[i]),
+                "pr_lang": pr_lang(cvs[i])
+            })
         
     response = json.dumps(d)
     return Response(response)

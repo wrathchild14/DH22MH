@@ -78,6 +78,14 @@
               @click="Analyze()"
               >Analyze data</v-btn
             >
+            <v-btn
+              color="blue darken-3"
+              class="white--text"
+              x-large
+              rounded
+              to="/results"
+              >Results</v-btn
+            >
           </div>
         </v-card>
       </v-col>
