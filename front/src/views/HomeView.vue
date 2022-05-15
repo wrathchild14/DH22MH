@@ -22,20 +22,19 @@
               max-height="200"
               src="../assets/paper.png"
             >
-        </v-img>
+            </v-img>
           </v-card>
         </v-col>
       </v-row>
     </v-card>
-    
-    
+
     <v-row>
       <v-col cols="5">
         <v-card width="70%" class="mx-auto mt-10 elevation-0">
           <h4 style="font-family: 'Verdana'">Filters</h4>
           <v-container>
             <v-checkbox
-              v-model="selected"
+              v-model="showCategorization"
               label="Categorization"
               value="Categorization"
             >
@@ -51,7 +50,7 @@
           ></v-text-field>
 
           <v-text-field
-            v-model="numberValue"
+            v-model="yearsExperience"
             label="Minimum years of experience"
             value="1"
             suffix="years"
@@ -99,7 +98,7 @@
 
 <script>
 import NavBar from "@/components/NavBar";
-import router from "@/router";
+// import router from "@/router";
 import { api } from "../axios-api";
 
 export default {
@@ -120,17 +119,30 @@ export default {
         api.get("api/del_pdf").then(() => {
           console.log("Deleted pdfs and created fresh pdf");
 
-          const form = new FormData();
-          form.append("file", this.chosenFile[0]);
-          api
-            .post("api/pdf", form)
-            .then((response) => {
-              console.log(response);
-              router.push("/results");
-            })
-            .catch((err) => {
-              console.log(err);
+          // const form = new FormData();
+          // form.append("file", this.chosenFile[0]);
+          // api
+          //   .post("api/pdf", form)
+          //   .then((response) => {
+          //     console.log(response);
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
+
+          for (const file of this.chosenFile) {
+            const form = new FormData();
+            form.append("file", file);
+            fetch("http://127.0.0.1:8000/api/pdf", {
+              method: "POST",
+              body: form,
+            }).then((res) => {
+              console.log("Request complete! response:", res);
             });
+          }
+
+          // router.push("/results");
+
         });
       }
     },

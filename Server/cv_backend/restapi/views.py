@@ -13,29 +13,25 @@ import shutil
 cvs = []
 directory = "pdfs/"
 
+
 @api_view(['POST'])
 def pdf_recieve(request):
     if request.method == 'POST':
         print("SUCCESS!")
-
         f = request.data['file'].file
         f.seek(0)
         pdf = f.read()
-
-        with open("pdfs/my_file.pdf", "wb") as binary_file:
+        with open('pdfs/my_file.pdf', "wb") as binary_file:
             # Write bytes to file
             binary_file.write(pdf)
 
-        for filename in os.listdir(directory):
-            f = os.path.join(directory, filename)
-            # checking if it is a file
-            if os.path.isfile(f):
-                with open(f, 'rb') as f:
-                    extracted_text = slate.PDF(f)
-                    t = extracted_text[0]
-                    t2 = t.replace("\n", " ")
-                    t2 = t2.replace("–", "-")
-                    cvs.append(t2)
+        with open('pdfs/my_file.pdf', 'rb') as f:
+            extracted_text = slate.PDF(f)
+            t = extracted_text[0]
+            t2 = t.replace("\n", " ")
+            t2 = t2.replace("–", "-")
+            print(t2)
+            cvs.append(t2)
 
         return Response(status=status.HTTP_200_OK)
 
@@ -48,6 +44,7 @@ def model_predict(request):
         response = json.dumps(d)
         return Response(response)
 
+
 @api_view(['GET', 'POST', ])
 def delete_pdfs(request):
     if request.method == 'GET':
@@ -55,6 +52,7 @@ def delete_pdfs(request):
         os.mkdir('pdfs')
         cvs.clear()
         return Response(status=status.HTTP_200_OK)
+
 
 @api_view(['GET'])
 def get_seniority(request):
@@ -65,6 +63,7 @@ def get_seniority(request):
         response = json.dumps(d)
         return Response(response)
 
+
 @api_view(['GET'])
 def get_name(request):
     if request.method == 'GET':
@@ -73,6 +72,7 @@ def get_name(request):
         d = {"name": rez}
         response = json.dumps(d)
         return Response(response)
+
 
 @api_view(['GET'])
 def get_email(request):
@@ -83,6 +83,7 @@ def get_email(request):
         response = json.dumps(d)
         return Response(response)
 
+
 @api_view(['GET'])
 def get_faculty(request):
     if request.method == 'GET':
@@ -91,6 +92,7 @@ def get_faculty(request):
         d = {"faculty": rez}
         response = json.dumps(d)
         return Response(response)
+
 
 @api_view(['GET'])
 def get_address(request):
@@ -102,6 +104,7 @@ def get_address(request):
         response = json.dumps(d)
         return Response(response)
 
+
 @api_view(['GET'])
 def get_pr_lang(request):
     if request.method == 'GET':
@@ -111,18 +114,21 @@ def get_pr_lang(request):
         response = json.dumps(d)
         return Response(response)
 
+
 @api_view(['GET'])
 def get_info(request):
     if request.method == 'GET':
-        d = {
-            'seniority': seniority(cvs[0]),
-            'name': name(cvs[0]),
-            'email': email(cvs[0]),
-            'faculty': faculty(cvs[0]),
-            'address': address(cvs[0]),
-            'pr_lang': pr_lang(cvs[0])
-        }
-
+        print(f"CVS:----- {cvs}")
+        for i in range(0, len(cvs)):
+            d = {
+                f"seniority-{i}": seniority(cvs[i]),
+                f"name-{i}": name(cvs[i]),
+                f"email-{i}": email(cvs[i]),
+                f"faculty-{i}": faculty(cvs[i]),
+                f"address-{i}": address(cvs[i]),
+                f"pr_lang-{i}": pr_lang(cvs[i])
+            }
+        
     response = json.dumps(d)
     return Response(response)
 
@@ -135,6 +141,7 @@ def godine_rada(date):
     god = abs(int(godina1.strip()[-2:]) - int(godina2.strip()[-2:]))
     return god
 
+
 def seniority(cv):
     first_work = cv.split("  ")[7]
     second_work = cv.split("  ")[18]
@@ -146,20 +153,24 @@ def seniority(cv):
     else:
         return "Senior"
 
+
 def name(cv):
     return cv.split("  ")[0]
+
 
 def email(cv):
     a, mail = cv.split("  ")[3].strip().split(" ")
     return mail
 
+
 def faculty(cv):
     return cv.split("  ")[37] + " " + cv.split("  ")[38]
+
 
 def address(cv):
     return cv.split("  ")[1].split(":")[1].strip()
 
+
 def pr_lang(cv):
     l = cv.split("  ")[45].split(",")
     return [i.strip() for i in l]
-
