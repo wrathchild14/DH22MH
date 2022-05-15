@@ -11,9 +11,7 @@
         </div>
       </v-card-text>
       <v-card-text>
-          <div class="font-weight-bold ml-8 mb-2">
-            Programming Languages
-          </div>
+        <div class="font-weight-bold ml-8 mb-2">Programming Languages</div>
         <v-timeline align-top dense>
           <v-timeline-item v-for="skill in data.pr_lang" :key="skill" small>
             <div>
@@ -25,8 +23,6 @@
         </v-timeline>
       </v-card-text>
     </v-card>
-
-
   </v-main>
 </template>
 
@@ -51,8 +47,6 @@ export default {
         .then((response) => {
           this.data = JSON.parse(response.data);
           console.log(this.data);
-
-          
         })
         .catch((err) => {
           console.log(err);

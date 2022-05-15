@@ -97,19 +97,19 @@ export default {
       } else {
         api.get("api/del_pdf").then(() => {
           console.log("Deleted pdfs and created fresh pdf");
-        });
 
-        const form = new FormData();
-        form.append("file", this.chosenFile[0]);
-        api
-          .post("api/pdf", form)
-          .then((response) => {
-            console.log(response);
-            router.push("/results");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+          const form = new FormData();
+          form.append("file", this.chosenFile[0]);
+          api
+            .post("api/pdf", form)
+            .then((response) => {
+              console.log(response);
+              router.push("/results");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
       }
     },
     processFile() {},
