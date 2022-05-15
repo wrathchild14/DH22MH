@@ -6,6 +6,7 @@
         <div>Candidate</div>
         <p class="text-h4 text--primary">{{ data.name }}</p>
         <p>{{ data.email }}</p>
+        <p>{{ data.address }}</p>
         <div class="text--primary">
           {{ data.faculty }}
         </div>
