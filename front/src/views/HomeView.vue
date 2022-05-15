@@ -1,17 +1,38 @@
 <template>
   <v-main>
     <NavBar />
+    <v-img
+    class="mx-auto my-10"
+          max-width="300"
+          max-height="300"
+          src="../assets/detective.jpg">
 
-    <v-file-input
-      counter
-      multiple
-      show-size
-      truncate-length="20"
-      v-model="chosenFile"
-      max-width="400"
-    ></v-file-input>
-
-    <v-btn block @click="Analyze()">Analyze data</v-btn>
+    </v-img>
+    <v-row >
+      <v-col cols="5">
+        <v-card width="70%" class="mx-auto mt-10 elevation-0">
+          <h1>filter i kategorizacija</h1>
+        </v-card>
+      </v-col>
+      <v-col cols="7">
+        <v-card width="70%" class="mx-auto mt-10 elevation-0">
+          <v-file-input
+            counter
+            multiple
+            show-size
+            truncate-length="20"
+            v-model="chosenFile"
+            max-width="400"
+          ></v-file-input>
+          <div class="text-center my-10">
+            <v-btn color="teal darken-4" class="white--text" rounded @click="Analyze()">Analyze data</v-btn>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
+    
+     
+    
 
     <v-dialog v-model="showAlert" width="210">
       <v-card>

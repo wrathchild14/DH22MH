@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar>
+  <v-toolbar class="teal darken-4">
     <div class="mx-auto">
       <router-link to="/">
         <v-img
