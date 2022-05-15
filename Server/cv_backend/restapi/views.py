@@ -45,7 +45,7 @@ def delete_pdfs(request):
     if request.method == 'GET':
         shutil.rmtree('pdfs')
         os.mkdir('pdfs')
-
+        cvs.clear()
         return Response(status=status.HTTP_200_OK)
 
 @api_view(['GET'])

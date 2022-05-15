@@ -95,12 +95,12 @@ export default {
       if (!this.chosenFile) {
         this.showAlert = true;
       } else {
-        console.log(this.chosenFile[0]);
+        api.get("api/del_pdf").then(() => {
+          console.log("Deleted pdfs and created fresh pdf");
+        });
 
         const form = new FormData();
         form.append("file", this.chosenFile[0]);
-
-        console.log(form);
         api
           .post("api/pdf", form)
           .then((response) => {
