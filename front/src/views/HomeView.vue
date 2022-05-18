@@ -34,7 +34,6 @@
           <h4 style="font-family: 'Verdana'">Filters</h4>
           <v-container>
             <v-checkbox
-              v-model="showCategorization"
               label="Categorization"
               value="Categorization"
             >
@@ -50,7 +49,6 @@
           ></v-text-field>
 
           <v-text-field
-            v-model="yearsExperience"
             label="Minimum years of experience"
             value="1"
             suffix="years"
